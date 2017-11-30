@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  */
 public class DepartmentTest {
 
-    Department d1;
+    private Department d1;
 
     @Before
     public void setUp() {
