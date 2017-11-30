@@ -56,7 +56,7 @@ public class DepartmentTest {
      * This test method expects an exception (i.e. the test method will pass if the MyCustomException is thrown).
      * This is part of JUnit 4
      */
-    public void removeEmployeeException() {
+    public void removeEmployeeException02() {
         d1.RemoveEmployee(5);
     }
 
@@ -65,7 +65,7 @@ public class DepartmentTest {
      * This test method expects an exception. A try/catch block can be used to test for the thrown exception.
      * Using a try/catch block increases the size of the method (i.e. LOC).
      */
-    public void removeEmployeeException2() {
+    public void removeEmployeeException01() {
         try {
             d1.RemoveEmployee(5);
         } catch (Exception error) {
