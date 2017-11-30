@@ -43,7 +43,7 @@ public class DepartmentTest {
      * This test method expects an exception. It checks the exception type and message
      * This is part of JUnit 4
      */
-    public void AddEmployeeException() throws MyCustomException {
+    public void addEmployeeException() throws MyCustomException {
         thrown.expect(MyCustomException.class);
         thrown.expectMessage("AddEmployee - Failure");
 
