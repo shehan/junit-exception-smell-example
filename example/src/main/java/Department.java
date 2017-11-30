@@ -1,30 +1,29 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Department {
     private String name;
-    private List<Employee> employeeList;
+    private Set<Integer> employeeList;
 
     public Department(String name) {
         this.name = name;
+        employeeList = new HashSet();
     }
 
     public String getName() {
         return name;
     }
 
-    public void AddEmployee(Employee employee){
-        if (employeeList==null)
-            employeeList = new ArrayList();
-
-        employeeList.add(employee);
+    public void AddEmployee(int employeeId){
+        if(!employeeList.add(employeeId))
+            throw new MyCustomException("AddEmployee - Failure");
     }
 
-    public void RemoveEmployee(Employee employee){
-        employeeList.remove(employee);
+    public void RemoveEmployee(int employeeId){
+        if(!employeeList.remove(employeeId))
+            throw new MyCustomException("RemoveEmployee - Failure");
     }
 
-    public List<Employee> getEmployeeList() {
-        return employeeList;
+    public boolean hasEmployee(int employeeId) {
+        return employeeList.contains(employeeId);
     }
 }

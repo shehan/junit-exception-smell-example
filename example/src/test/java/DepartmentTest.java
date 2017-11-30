@@ -1,21 +1,16 @@
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 
 public class DepartmentTest {
 
-    Employee e1, e2, e3, e4, e5;
     Department d1, d2;
 
     @Before
     public void setUp() {
-        e1 = new Employee(1);
-        e2 = new Employee(2);
-        e3 = new Employee(3);
-        e4 = new Employee(4);
-        e5 = new Employee(5);
-
         d1 = new Department("HR");
         d2 = new Department("IT");
     }
@@ -27,33 +22,49 @@ public class DepartmentTest {
 
     @Test
     public void addEmployee() {
-        d1.AddEmployee(e1);
-        assertTrue(d1.getEmployeeList().contains(e1));
+        d1.AddEmployee(1);
+        assertTrue(d1.hasEmployee(1));
     }
 
     @Test
     public void removeEmployee() {
-        d1.AddEmployee(e2);
-        d1.RemoveEmployee(e2);
-        assertFalse(d1.getEmployeeList().contains(e2));
+        d1.AddEmployee(2);
+        d1.RemoveEmployee(2);
+        assertFalse(d1.hasEmployee(2));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void shouldTestExceptionMessage() {
+        thrown.expect(MyCustomException.class);
+        thrown.expectMessage("AddEmployee - Failure");
+
+        d1.AddEmployee(3);
+        d1.AddEmployee(3);
+        d1.AddEmployee(4);
+    }
+
+    @Test(expected = MyCustomException.class)
+    /**
+     * This test method expects an exception (i.e. the test method will pass if the NullPointerException is thrown).
+     */
     public void removeEmployeeException() {
-        d1.RemoveEmployee(e2);
+        d1.RemoveEmployee(5);
     }
 
     @Test
+    /**
+     * This test method expects an exception. A try/catch block can be used to test for the thrown exception.
+     * Using a try/catch block increases the size of the method (i.e. LOC).
+     */
     public void removeEmployeeException2() {
         try {
-            d1.RemoveEmployee(e2);
+            d1.RemoveEmployee(5);
         } catch (Exception error) {
-            assertEquals(error.getClass(), NullPointerException.class);
+            assertEquals(error.getClass(), MyCustomException.class);
         }
-    }
-
-    @Test
-    public void getEmployeeList() {
     }
 
 }
